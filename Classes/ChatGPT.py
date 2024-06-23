@@ -1,12 +1,10 @@
 import requests
-import json
-import os
 
 class ChatGPT:
     @staticmethod
     def response(prompt):
 
-        openai_api_key =  "YOUR-OPENAI-API"
+        openai_api_key = "OPEN-AI"
         if openai_api_key is None:
             raise ValueError("OpenAI API key is not set in environment variables.")
 

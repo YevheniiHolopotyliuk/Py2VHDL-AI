@@ -1,11 +1,5 @@
-import os
-import sys
-print(sys.path)
-
-from Classes.ChatGPT import *
-from Classes.Entity_VHDL import *
-
-from Classes.ChatGPT import *
+from Classes.py2vhdl import *
+Port()
 
 # GPT tests
 # gpt_test = ChatGPT()

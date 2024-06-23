@@ -1,6 +1,4 @@
 from Classes.ChatGPT import *
-from Classes.VHDL_CONST import *
-import inspect
 
 class Entity:
 
@@ -25,10 +23,10 @@ class Entity:
 
         # Print results
         print(self.PYTHON_CODE)
-        print(self.VHDL_entity_header(self.PYTHON_CODE))
+        print(self.VHDL_Python_default_convertor(self.PYTHON_CODE))
+        # print(self.Python_to_VHDL_full(self.PYTHON_CODE)) - without library
+        # print(self.VHDL_entity_header(self.PYTHON_CODE)) - in basis is Entity creates. Good work
 
-
-        # self.VHDL_CODE = self.VHDL_entity_header(self.PYTHON_CODE)
 
     # Create architecture
     def create_entity_header(self, port):
@@ -38,7 +36,7 @@ class Entity:
             entity_header_python= self.beggin_entity + self.beggin_header_entity
             entity_header_python += self.beggin_header_end + self.end_entity
         # Port checking on number
-        if(len(port) > 1):
+        if(len(port) > 0):
             # Creating begin text of part for VHDL
             entity_header_python= self.beggin_entity + self.beggin_header_entity + self.beggin_port
             for el_port in port:
@@ -51,14 +49,13 @@ class Entity:
 
     def create_arch(self, body):
 
-        arch_python = self.architecture_begin + self.architecture_body_begin
+        arch_python = self.architecture_begin
 
         for el in body:
             arch_python += el
 
-        arch_python += self.architecture_body_end + self.architecture_end
+        arch_python +=  self.architecture_end
 
-        print(arch_python)
         # Creating end of part for VHDL
 
         return arch_python
@@ -72,7 +69,12 @@ class Entity:
     def Python_to_VHDL_full(code):
         prompt = "Convert code from Python to VHDL: \n" + code
         return ChatGPT.response(prompt)
-    
+
+    def VHDL_Python_default_convertor(self, code):
+        prompt = "Convert code from Python to VHDL by rules - include libraries, create Entity, create Architecture, variables from Architecture not includeing in Entity: \n" + code
+        return ChatGPT.response(prompt)
+
+
     def VHDL_entity_header(self, code):
         prompt = "Convert code from Python to VHDL and create Entity and add library: \n" + code
         return ChatGPT.response(prompt)
@@ -80,37 +82,6 @@ class Entity:
     def VHDL_entity_process(self,code):
         prompt = "Convert code from Python to VHDL and create Process: \n" + code
         return ChatGPT.response(prompt)
-    #
-    #
-    @staticmethod
-    def Port(port_signal_name , input_output,port_signal_type = "" ):
-        # Data area for checking all situations for inputing attributes
-        port_end = ""
-
-        if(port_signal_type != ""):
-            port_end = ","+ port_signal_type
-        else:
-            port_end = ""
-
-        # print("Port(\""+ port_signal_name +"\","+input_output + port_end +")")
-        return "Port(\""+ port_signal_name +"\","+input_output + port_end +") \n"
-
-    # Migration to "Architeture_VHDL.py"
-    # @staticmethod
-    # def Process(function_do,gpt_request = False):
-
-    #     if(gpt_request == False):
-    #         lines = inspect.getsource(function_do)
-    #         return "Process(\"" + lines + "\")\n"
-
-    #     if(gpt_request == True):
-    #         return function_do
-
-        # If need for remove first line that init attributes and name of function
-        # postString = lines.split("\n", 1)[1]
-        # print(postString)
-
-
 
     # Elements for convert
     def elements_init(self):
@@ -136,8 +107,8 @@ class Entity:
         self.architecture_begin = "\n \"architecture\" = [  "
         self.architecture_end = "]"
 
-        self.architecture_body_begin = "\n \"body\" = [  "
-        self.architecture_body_end = "]"
+        # self.architecture_body_begin = "\n \"body\" = [  "
+        # self.architecture_body_end = "]"
 
         # Process
 
