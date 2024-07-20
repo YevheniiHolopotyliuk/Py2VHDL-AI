@@ -25,7 +25,7 @@ def process(ALUctrl,ABUS,BBUS,tmp_out1,tmp):
 
 
 Entity(
-    name_entity= "ALU",
+    name_entity= "FILTER",
 
     port=[
         Port("ABUS,BBUS",IN, STD_VECTOR(15,0,DOWN)),
@@ -78,14 +78,3 @@ Entity(
 
     ]
 )
-
-Entity(
-    name_entity= "ALU",
-    port=[
-    # List of ports Entity
-    ],
-    architecture=[
-    #List components of Architecture
-    ]
-)
-

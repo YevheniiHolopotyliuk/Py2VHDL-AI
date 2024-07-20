@@ -4,7 +4,7 @@ class ChatGPT:
     @staticmethod
     def response(prompt):
 
-        openai_api_key = "OPEN-AI"
+        openai_api_key = "API code"
         if openai_api_key is None:
             raise ValueError("OpenAI API key is not set in environment variables.")
 
@@ -19,7 +19,7 @@ class ChatGPT:
             "model": "gpt-3.5-turbo-instruct",
             "prompt": prompt,
             "temperature": 0,
-            "max_tokens": 256,
+            "max_tokens": 1500,
             "top_p": 1,
             "frequency_penalty": 0,
             "presence_penalty": 0

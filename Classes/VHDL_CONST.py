@@ -38,6 +38,8 @@ def NOT():
     pass
 def OR():
     pass
+def xor():
+    pass
 def wait():
     pass
 

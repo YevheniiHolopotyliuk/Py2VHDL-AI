@@ -1,5 +1,5 @@
 from Classes.py2vhdl import *
-Port()
+
 
 # GPT tests
 # gpt_test = ChatGPT()

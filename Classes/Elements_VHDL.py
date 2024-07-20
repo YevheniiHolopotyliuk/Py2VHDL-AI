@@ -49,12 +49,37 @@ def Generic(elements = []):
     if (len(elements) == 0):
         return ""
 
+
+# Add name for Component
 def Component(name ="",elements = []):
     if(len(elements) > 0):
         list_of_elemetns = ""
         for el in elements:
             list_of_elemetns += el
         # return "Component "+name+" ("+list_of_elemetns+") \n"
-        return "Component (" + list_of_elemetns + ") \n"
+        return "component "+ name + " (" + list_of_elemetns + ") \n"
     if(len(elements) == 0):
         return ""
+
+
+def var(name, variable):
+    return name+ " => "+ variable+ "  "
+
+def Generic_map(name ="", to_element ="", map = [], port = []):
+    if(len(map) > 0):
+        list_of_map = ""
+
+        for el in map:
+            list_of_map += el
+
+        list_of_port = ""
+
+        for el in list_of_port:
+            list_of_port += el
+
+        # return "Component "+name+" ("+list_of_elemetns+") \n"
+        return name+" : "+  to_element +"generic map (" + list_of_map + ") port map("+list_of_port+"); \n"
+    if(len(map) == 0):
+        return ""
+
+
